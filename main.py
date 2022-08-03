@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.preprocessing import StandardScaler
 from xgboost import XGBClassifier, to_graphviz, plot_tree
+import graphviz
 
 # The following lines are meant to allow us to add multiple buttons on the same page
 ################################################################
@@ -250,8 +251,8 @@ if uploaded_file is not None:
 
                             e5.subheader(f"Model accuracy: {round(accuracy_score(y_test, y_pred), 4) * 100} %")
                             viz = to_graphviz(model)
-                            viz.render(filename='tree', format='png')
-                            c9.image('tree.png')
+                            c9.write(viz)
+                            # viz.render(filename='tree', format='png')
                             # # viz = plot_tree(model)
                             # c9.pyplot(plot_tree(model))
 
