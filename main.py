@@ -38,7 +38,6 @@ def proceed5_button():
     st.session_state.proceed5 = True
 
 
-@st.cache
 def model_building(X, y):
     with st.spinner('Model building in progress'):
         try:
