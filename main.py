@@ -67,6 +67,12 @@ Moreover, you can download your model in pkl format.\n
 Step 6: Ready to make some predictions? Input the feature values and generate prediction as output. Isn't it great?\n
 \n""")
 st.markdown("""---""")
+st.markdown("""To help you better understand how this app works, I have prepared a sample dataset
+<a href="https://github.com/cheewoeing/Streamlit_Classification/blob/master/Sample_Data/penguins.csv">penguins.csv</a>
+. You can use this dataset and follow along with the step-by-step instructions given in this
+<a href="https://github.com/cheewoeing/Streamlit_Classification/blob/master/Sample_Data/README.txt">README.txt</a>.""",
+            unsafe_allow_html=True)
+st.markdown("""---""")
 st.markdown("""
 This app is made with  <a href="https://streamlit.io">Streamlit API</a>. \n
 I have taken some reference from this Udemy course 
