@@ -250,8 +250,12 @@ if uploaded_file is not None:
                             y_pred = model.predict(X_test)
 
                             e5.subheader(f"Model accuracy: {round(accuracy_score(y_test, y_pred), 4) * 100} %")
-                            viz = to_graphviz(model)
-                            c9.write(viz)
+                            # viz = to_graphviz(model)
+                            # viz.format='png'
+                            plot_tree(model)
+
+
+                            # c9.write(viz)
                             # viz.render(filename='tree', format='png')
                             # # viz = plot_tree(model)
                             # c9.pyplot(plot_tree(model))
