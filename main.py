@@ -252,13 +252,15 @@ if uploaded_file is not None:
                             e5.subheader(f"Model accuracy: {round(accuracy_score(y_test, y_pred), 4) * 100} %")
                             viz = to_graphviz(model)
                             # viz.format='png'
-                            plot_tree(model)
+                            # c9.write(str(viz))
+                            # ax = plot_tree(model)
+                            c9.graphviz_chart(str(viz))
 
 
                             # c9.write(viz)
                             # viz.render(filename='tree', format='png')
-                            # # viz = plot_tree(model)
-                            c9.image('tree.png')
+                            # # # viz = plot_tree(model)
+                            # c9.image('tree.png')
 
                             plot_confusion_matrix(model, X_test, y_test, display_labels=class_names)
                             plt.title('Confusion matrix')
@@ -277,7 +279,7 @@ if uploaded_file is not None:
                                 user_input_dict = {}
                                 for feature in features:
                                     if isColumnNumeric[feature]:
-                                        user_input_dict[feature] = [c11.number_input(f"{feature}:", value=0, step=1)]
+                                        user_input_dict[feature] = [c11.number_input(f"{feature}:")]
                                     else:
                                         user_input_dict[feature] = [
                                             c11.selectbox(f"{feature}", columnUniqueValues[feature])]
