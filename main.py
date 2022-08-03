@@ -8,7 +8,7 @@ from sklearn.metrics import plot_confusion_matrix, accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.preprocessing import StandardScaler
-from xgboost import XGBClassifier, to_graphviz
+from xgboost import XGBClassifier, to_graphviz, plot_tree
 
 # The following lines are meant to allow us to add multiple buttons on the same page
 ################################################################
@@ -128,7 +128,7 @@ if uploaded_file is not None:
         # Select features and label
 
         c3.subheader("2.1 Select features (X)")
-        features = c3.multiselect('Select features(X)', columns, list(columns[:-1]))
+        features = c3.multiselect('Select features(X)', columns)
         if len(features) > 0:
             c3.subheader("2.2 Select label (y)")
             label = c3.radio('Select label(y)', columns[~columns.isin(features)])
@@ -252,6 +252,9 @@ if uploaded_file is not None:
                             viz = to_graphviz(model)
                             viz.render(filename='tree', format='png')
                             c9.image('tree.png')
+                            # # viz = plot_tree(model)
+                            # c9.pyplot(plot_tree(model))
+
                             plot_confusion_matrix(model, X_test, y_test, display_labels=class_names)
                             plt.title('Confusion matrix')
                             plt.savefig('cm.png')
