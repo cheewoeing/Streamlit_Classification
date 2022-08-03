@@ -12,7 +12,7 @@ from xgboost import XGBClassifier, to_graphviz
 
 # The following lines are meant to allow us to add multiple buttons on the same page
 ################################################################
-button_list = ['proceed1', 'proceed2', 'proceed3', 'proceed4', 'proceed5', 'proceed6']
+button_list = ['proceed1', 'proceed2', 'proceed3', 'proceed4', 'proceed5']
 for button in button_list:
     if button not in st.session_state:
         st.session_state[button] = False
@@ -37,9 +37,6 @@ def proceed4_button():
 def proceed5_button():
     st.session_state.proceed5 = True
 
-
-def proceed6_button():
-    st.session_state.proceed6 = True
 
 
 ################################################################
@@ -287,19 +284,14 @@ if uploaded_file is not None:
                                 if features_scaled:
                                     user_input_df[features_scaled] = sc.transform(user_input_df[features_scaled])
 
-                                proceed6 = (c10.button('Proceed to make prediction', on_click=proceed6_button,
-                                                       key=6) or st.session_state.proceed6)
+                                c11.subheader('6.2 Prediction')
+                                try:
+                                    pred = model.predict(user_input_df)
+                                    if label_encode:
+                                        c11.write(f"The prediction for {label} is {(le.inverse_transform(pred))[0]}.")
 
-                                if proceed6:
+                                    else:
+                                        c11.write(f"The prediction for {label} is {pred[0]}.")
 
-                                    c11.subheader('6.2 Prediction')
-                                    try:
-                                        pred = model.predict(user_input_df)
-                                        if label_encode:
-                                            c11.write(f"The prediction for {label} is {(le.inverse_transform(pred))[0]}.")
-
-                                        else:
-                                            c11.write(f"The prediction for {label} is {pred[0]}.")
-
-                                    except:
-                                        c6.error('Couldn\'t make prediction at this moment.')
+                                except:
+                                    c6.error('Couldn\'t make prediction at this moment.')
