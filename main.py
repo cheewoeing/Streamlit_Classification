@@ -39,6 +39,17 @@ def proceed5_button():
 
 
 
+def model_building(X, y):
+    with st.spinner('Model building in progress'):
+        try:
+            model = XGBClassifier()
+            model.fit(X, y)
+
+        except:
+            st.error("Please make sure all the string variables are encoded.")
+    return model
+
+
 ################################################################
 
 st.set_page_config(page_title='Machine Learning with Streamlit', layout='wide')
@@ -237,19 +248,20 @@ if uploaded_file is not None:
                         e5.subheader('5.1 Build and evaluate model')
 
                         model = None
-                        with st.spinner('Model building in progress'):
-                            try:
-                                model = XGBClassifier()
-                                model.fit(X_train, y_train)
-
-                            except:
-                                st.error("Please make sure all the string variables are encoded.")
+                        model=model_building(X_train,y_train)
+                        # with st.spinner('Model building in progress'):
+                        #     try:
+                        #         model = XGBClassifier()
+                        #         model.fit(X_train, y_train)
+                        #
+                        #     except:
+                        #         st.error("Please make sure all the string variables are encoded.")
 
                         if model:
 
                             y_pred = model.predict(X_test)
 
-                            e5.subheader(f"Model accuracy: {round((accuracy_score(y_test, y_pred))* 100,4)} %")
+                            e5.subheader(f"Model accuracy: {round((accuracy_score(y_test, y_pred)) * 100, 4)} %")
 
                             plot_confusion_matrix(model, X_test, y_test, display_labels=class_names)
                             plt.title('Confusion matrix')
@@ -268,32 +280,32 @@ if uploaded_file is not None:
                                 c10.subheader('6.1 Make Prediction with User input')
 
                                 user_input_dict = {}
-                                with st.form("my_form"):
-                                    for feature in features:
-                                        if isColumnNumeric[feature]:
-                                            user_input_dict[feature] = [c10.number_input(f"{feature}:")]
-                                        else:
-                                            user_input_dict[feature] = [
-                                                c10.selectbox(f"{feature}", columnUniqueValues[feature])]
-                                    submitted = st.form_submit_button("Submit Input and Make Prediction")
-                                    if submitted:
-                                        user_input_df = pd.DataFrame.from_dict(user_input_dict)
+                                # with st.form("my_form"):
+                                for feature in features:
+                                    if isColumnNumeric[feature]:
+                                        user_input_dict[feature] = [c10.number_input(f"{feature}:")]
+                                    else:
+                                        user_input_dict[feature] = [
+                                            c10.selectbox(f"{feature}", columnUniqueValues[feature])]
 
-                                        if one_hot_encode:
-                                            user_input_df = np.array(ct.transform(user_input_df))
-                                            user_input_df = pd.DataFrame(user_input_df, columns=columns_name)
+                                user_input_df = pd.DataFrame.from_dict(user_input_dict)
 
-                                        if features_scaled:
-                                            user_input_df[features_scaled] = sc.transform(user_input_df[features_scaled])
+                                if one_hot_encode:
+                                    user_input_df = np.array(ct.transform(user_input_df))
+                                    user_input_df = pd.DataFrame(user_input_df, columns=columns_name)
 
+                                if features_scaled:
+                                    user_input_df[features_scaled] = sc.transform(
+                                        user_input_df[features_scaled])
 
-                                        try:
-                                            pred = model.predict(user_input_df)
-                                            if label_encode:
-                                                st.subheader(f"The prediction for {label} is {(le.inverse_transform(pred))[0]}.")
+                                try:
+                                    pred = model.predict(user_input_df)
+                                    if label_encode:
+                                        st.subheader(
+                                            f"The prediction for {label} is {(le.inverse_transform(pred))[0]}.")
 
-                                            else:
-                                                st.subheader(f"The prediction for {label} is {pred[0]}.")
+                                    else:
+                                        st.subheader(f"The prediction for {label} is {pred[0]}.")
 
-                                        except:
-                                            st.error('Couldn\'t make prediction at this moment.')
+                                except:
+                                    st.error('Couldn\'t make prediction at this moment.')
