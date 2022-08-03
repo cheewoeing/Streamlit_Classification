@@ -76,10 +76,10 @@ st.markdown("""---""")
 st.markdown("""
 This app is made with  <a href="https://streamlit.io">Streamlit API</a>. \n
 I have taken some reference from this Udemy course 
-<a href="https://www.udemy.com/course/machinelearning/">Machine Learning A-Z</a>. This course gave an very good 
+<a href="https://www.udemy.com/course/machinelearning/">Machine Learning A-Z</a>. This course gave a very good 
 explanation on various machine learning algorithms.\n
 Also, I strongly recommend this 
-<a href="https://www.youtube.com/watch?v=JwSS70SZdyM&t=9068s">video</a>video on YouTube by 
+<a href="https://www.youtube.com/watch?v=JwSS70SZdyM&t=9068s">video</a> on YouTube by 
 <a href="https://www.youtube.com/dataprofessor">Data Professor</a>. Ths video helps me get a very good understanding of 
 various types of Streamlit implementations. \n
 """, unsafe_allow_html=True)
