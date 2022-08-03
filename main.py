@@ -249,7 +249,7 @@ if uploaded_file is not None:
 
                             y_pred = model.predict(X_test)
 
-                            e5.subheader(f"Model accuracy: {round(accuracy_score(y_test, y_pred), 4) * 100} %")
+                            e5.subheader(f"Model accuracy: {round((accuracy_score(y_test, y_pred))* 100,4)} %")
 
                             plot_confusion_matrix(model, X_test, y_test, display_labels=class_names)
                             plt.title('Confusion matrix')
@@ -268,30 +268,32 @@ if uploaded_file is not None:
                                 c10.subheader('6.1 Make Prediction with User input')
 
                                 user_input_dict = {}
-                                for feature in features:
-                                    if isColumnNumeric[feature]:
-                                        user_input_dict[feature] = [c10.number_input(f"{feature}:")]
-                                    else:
-                                        user_input_dict[feature] = [
-                                            c10.selectbox(f"{feature}", columnUniqueValues[feature])]
+                                with st.form("my_form"):
+                                    for feature in features:
+                                        if isColumnNumeric[feature]:
+                                            user_input_dict[feature] = [c10.number_input(f"{feature}:")]
+                                        else:
+                                            user_input_dict[feature] = [
+                                                c10.selectbox(f"{feature}", columnUniqueValues[feature])]
+                                    submitted = st.form_submit_button("Submit Input and Make Prediction")
+                                    if submitted:
+                                        user_input_df = pd.DataFrame.from_dict(user_input_dict)
 
-                                user_input_df = pd.DataFrame.from_dict(user_input_dict)
+                                        if one_hot_encode:
+                                            user_input_df = np.array(ct.transform(user_input_df))
+                                            user_input_df = pd.DataFrame(user_input_df, columns=columns_name)
 
-                                if one_hot_encode:
-                                    user_input_df = np.array(ct.transform(user_input_df))
-                                    user_input_df = pd.DataFrame(user_input_df, columns=columns_name)
+                                        if features_scaled:
+                                            user_input_df[features_scaled] = sc.transform(user_input_df[features_scaled])
 
-                                if features_scaled:
-                                    user_input_df[features_scaled] = sc.transform(user_input_df[features_scaled])
 
-                                c11.subheader('6.2 Prediction')
-                                try:
-                                    pred = model.predict(user_input_df)
-                                    if label_encode:
-                                        c11.write(f"The prediction for {label} is {(le.inverse_transform(pred))[0]}.")
+                                        try:
+                                            pred = model.predict(user_input_df)
+                                            if label_encode:
+                                                st.subheader(f"The prediction for {label} is {(le.inverse_transform(pred))[0]}.")
 
-                                    else:
-                                        c11.write(f"The prediction for {label} is {pred[0]}.")
+                                            else:
+                                                st.subheader(f"The prediction for {label} is {pred[0]}.")
 
-                                except:
-                                    c6.error('Couldn\'t make prediction at this moment.')
+                                        except:
+                                            st.error('Couldn\'t make prediction at this moment.')
