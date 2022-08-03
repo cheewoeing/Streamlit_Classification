@@ -8,8 +8,7 @@ from sklearn.metrics import plot_confusion_matrix, accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.preprocessing import StandardScaler
-from xgboost import XGBClassifier, to_graphviz, plot_tree
-import graphviz
+from xgboost import XGBClassifier, to_graphviz
 
 # The following lines are meant to allow us to add multiple buttons on the same page
 ################################################################
