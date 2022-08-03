@@ -91,6 +91,15 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
     columns = df.columns
     c1.subheader("1.2 Deal with missing data")
+    drop_missing_data = c1.checkbox('Drop rows with missing data?')
+
+    if drop_missing_data:
+        drop_missing_data_columns = c1.multiselect('Drop rows that has empty value for following fields',
+                                                   columns)
+
+        if len(drop_missing_data_columns) > 0:
+            df = df.dropna(subset=drop_missing_data_columns)
+
     fill_missing_data = c1.checkbox('Fill missing numerical data with mean?')
 
     if fill_missing_data:
@@ -278,10 +287,10 @@ if uploaded_file is not None:
                                 try:
                                     pred = model.predict(user_input_df)
                                     if label_encode:
-                                        c12.write(f"The prediction for {label} is {le.inverse_transform(pred)}.")
+                                        c12.write(f"The prediction for {label} is {(le.inverse_transform(pred))[0]}.")
 
                                     else:
-                                        c12.write(f"The prediction for {label} is {pred}.")
+                                        c12.write(f"The prediction for {label} is {pred[0]}.")
 
                                 except:
                                     c6.error('Couldn\'t make prediction at this moment.')
