@@ -38,7 +38,7 @@ def proceed5_button():
     st.session_state.proceed5 = True
 
 
-
+@st.cache
 def model_building(X, y):
     with st.spinner('Model building in progress'):
         try:
@@ -248,7 +248,7 @@ if uploaded_file is not None:
                         e5.subheader('5.1 Build and evaluate model')
 
                         model = None
-                        model=model_building(X_train,y_train)
+                        model = model_building(X_train, y_train)
                         # with st.spinner('Model building in progress'):
                         #     try:
                         #         model = XGBClassifier()
