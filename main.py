@@ -250,8 +250,8 @@ if uploaded_file is not None:
 
                             e5.subheader(f"Model accuracy: {round(accuracy_score(y_test, y_pred), 4) * 100} %")
                             viz = to_graphviz(model)
-                            # viz.render(filename='tree', format='png')
-                            # c9.image('tree.png')
+                            viz.render(filename='tree', format='png')
+                            c9.image('tree.png')
                             plot_confusion_matrix(model, X_test, y_test, display_labels=class_names)
                             plt.title('Confusion matrix')
                             plt.savefig('cm.png')
