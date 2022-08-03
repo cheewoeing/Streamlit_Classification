@@ -13,7 +13,7 @@ import graphviz
 
 # The following lines are meant to allow us to add multiple buttons on the same page
 ################################################################
-button_list = ['proceed1', 'proceed2', 'proceed3', 'proceed4', 'proceed5']
+button_list = ['proceed1', 'proceed2', 'proceed3', 'proceed4', 'proceed5', 'proceed6']
 for button in button_list:
     if button not in st.session_state:
         st.session_state[button] = False
@@ -37,6 +37,10 @@ def proceed4_button():
 
 def proceed5_button():
     st.session_state.proceed5 = True
+
+
+def proceed6_button():
+    st.session_state.proceed6 = True
 
 
 ################################################################
@@ -256,7 +260,6 @@ if uploaded_file is not None:
                             # ax = plot_tree(model)
                             c9.graphviz_chart(str(viz))
 
-
                             # c9.write(viz)
                             # viz.render(filename='tree', format='png')
                             # # # viz = plot_tree(model)
@@ -274,7 +277,7 @@ if uploaded_file is not None:
                             if proceed5:
                                 e6.markdown("""---""")
                                 e6.header('Section 6')
-                                c11.subheader('6.1 User input')
+                                c11.subheader('6.1 Make Prediction with User input')
 
                                 user_input_dict = {}
                                 for feature in features:
@@ -293,14 +296,19 @@ if uploaded_file is not None:
                                 if features_scaled:
                                     user_input_df[features_scaled] = sc.transform(user_input_df[features_scaled])
 
-                                c12.subheader('6.2 Make prediction')
-                                try:
-                                    pred = model.predict(user_input_df)
-                                    if label_encode:
-                                        c12.write(f"The prediction for {label} is {(le.inverse_transform(pred))[0]}.")
+                                proceed6 = (c11.button('Proceed to next step', on_click=proceed6_button,
+                                                       key=6) or st.session_state.proceed6)
 
-                                    else:
-                                        c12.write(f"The prediction for {label} is {pred[0]}.")
+                                if proceed6:
 
-                                except:
-                                    c6.error('Couldn\'t make prediction at this moment.')
+                                    c12.subheader('6.2 Prediction')
+                                    try:
+                                        pred = model.predict(user_input_df)
+                                        if label_encode:
+                                            c12.write(f"The prediction for {label} is {(le.inverse_transform(pred))[0]}.")
+
+                                        else:
+                                            c12.write(f"The prediction for {label} is {pred[0]}.")
+
+                                    except:
+                                        c6.error('Couldn\'t make prediction at this moment.')
