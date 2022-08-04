@@ -211,7 +211,6 @@ if uploaded_file is not None:
                     c7.subheader("4.2 Scaling features")
                     r = re.compile("^(?!encoder.*$).*")
                     features_scaled_option = list(filter(r.match, X.columns))
-                    c7.write(features_scaled_option)
                     features_scaled = c7.multiselect("Features to be scaled(Optional)", features_scaled_option)
 
                     if len(features_scaled) > 0:
