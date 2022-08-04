@@ -15,9 +15,6 @@ recommend you to run this app on your localhost and install required python pack
 You can access the source code via this Github repo
 https://github.com/cheewoeing/Streamlit_Classification
 
-
-Our objective is to predict the species of the penguins.
-
 ## 1.1 Upload your CSV file
 You can get the sample data via the link below.
 https://github.com/cheewoeing/Streamlit_Classification/blob/master/Sample_Data/penguins.csv
@@ -25,8 +22,9 @@ Please upload the penguins.csv file that you have just downloaded.
 Our objective is to predict the species of the penguins.
 
 ## 1.2 Deal with missing data
-I have delibetely deleted some fields on the first 4 rows of data. Please check "Drop rows with missing data?" and on the
-drop down menu please select "sex". You will notice that first 2 rows has been deleted as their "sex" field is empty.
+I have delibetely deleted some fields on the first 4 rows of data. 
+Please check "Drop rows with missing data?" and on the drop down menu please select "sex". 
+You will notice that first 2 rows has been deleted as their "sex" field is empty.
 Also, please check "fill missing data with mean?" and on the drop down menu please select "bill_length_mm". You will
 notice that row 2 and 3 has been filled with mean value of the column.
 
