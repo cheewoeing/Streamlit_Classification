@@ -168,7 +168,10 @@ if uploaded_file is not None:
                 one_hot_column = c3.multiselect("Features to be one-hot encoded", features)
                 ct = ColumnTransformer(transformers=[('encoder', OneHotEncoder(), one_hot_column)], remainder=
                 'passthrough')
-                X = np.array(ct.fit_transform(X))
+                try:
+                    X = np.array(ct.fit_transform(X))
+                except:
+                    c3.error("This column cannot be one-hot encoded.")
                 columns_name = ct.get_feature_names()
                 X = pd.DataFrame(X, columns=columns_name)
 
