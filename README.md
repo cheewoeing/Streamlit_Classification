@@ -22,6 +22,7 @@ Our objective is to predict the species of the penguins.
 Please upload the penguins.csv file that you have just downloaded.
 You can get the sample data via the link below.
 https://github.com/cheewoeing/Streamlit_Classification/blob/master/Sample_Data/penguins.csv
+Our objective is to predict the species of the penguins.
 
 ## 1.2 Deal with missing data
 I have delibetely deleted some fields on the first 4 rows of data. Please check "Drop rows with missing data?" and on the
