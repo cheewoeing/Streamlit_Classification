@@ -19,9 +19,9 @@ https://github.com/cheewoeing/Streamlit_Classification
 Our objective is to predict the species of the penguins.
 
 ## 1.1 Upload your CSV file
-Please upload the penguins.csv file that you have just downloaded.
 You can get the sample data via the link below.
 https://github.com/cheewoeing/Streamlit_Classification/blob/master/Sample_Data/penguins.csv
+Please upload the penguins.csv file that you have just downloaded.
 Our objective is to predict the species of the penguins.
 
 ## 1.2 Deal with missing data
