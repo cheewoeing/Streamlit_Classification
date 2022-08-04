@@ -260,14 +260,6 @@ if uploaded_file is not None:
 
                         model = None
                         model = model_building(X_train, y_train)
-                        # with st.spinner('Model building in progress'):
-                        #     try:
-                        #         model = XGBClassifier()
-                        #         model.fit(X_train, y_train)
-                        #
-                        #     except:
-                        #         st.error("Please make sure all the string variables are encoded.")
-
                         if model:
 
                             y_pred = model.predict(X_test)
@@ -291,7 +283,6 @@ if uploaded_file is not None:
                                 c10.subheader('6.1 Make Prediction with User input')
 
                                 user_input_dict = {}
-                                # with st.form("my_form"):
                                 for feature in features:
                                     if isColumnNumeric[feature]:
                                         user_input_dict[feature] = [c10.number_input(f"{feature}:")]
@@ -320,3 +311,5 @@ if uploaded_file is not None:
 
                                 except:
                                     st.error('Couldn\'t make prediction at this moment.')
+
+
