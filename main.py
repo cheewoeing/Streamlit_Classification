@@ -194,7 +194,7 @@ if uploaded_file is not None:
                     y = pd.DataFrame(y, columns=[label])
                     c6.subheader('Preview your data')
                     c6.write(pd.concat([X, y], axis=1))
-                    c6.write(pd.DataFrame((zip(le.classes_, le.transform(le.classes_))), columns=['Value', 'Code']))
+                    c5.write(pd.DataFrame((zip(le.classes_, le.transform(le.classes_))), columns=['Value', 'Code']))
 
                 proceed3 = (c5.button('Proceed to next step', on_click=proceed3_button,
                                       key=3) or st.session_state.proceed3)
