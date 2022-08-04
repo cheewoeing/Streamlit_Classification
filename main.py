@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.preprocessing import StandardScaler
 from xgboost import XGBClassifier, to_graphviz
+import re
 
 # The following lines are meant to allow us to add multiple buttons on the same page
 ################################################################
@@ -208,7 +209,10 @@ if uploaded_file is not None:
 
                     # Select features to be scaled
                     c7.subheader("4.2 Scaling features")
-                    features_scaled = c7.multiselect("Features to be scaled(Optional)", X.columns)
+                    r = re.compile("^(?!encoder.*$).*")
+                    features_scaled_option = list(filter(r.match, X.columns))
+                    c7.write(features_scaled_option)
+                    features_scaled = c7.multiselect("Features to be scaled(Optional)", features_scaled_option)
 
                     if len(features_scaled) > 0:
                         sc = StandardScaler()
